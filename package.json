@@ -10,8 +10,9 @@
     "ios": "expo run:ios",
     "ios:device": "expo run:ios --device",
     "android:device": "expo run:android --device",
-    "android:release": "expo run:android --variant release",
-    "android:apk": "expo run:android --variant release",
+    "android:release": "expo run:android --variant release --no-install",
+    "android:apk": "expo run:android --variant release --no-install",
+    "android:build-apk": "cd android && ./gradlew assembleRelease && cd ..",
     "web": "expo start --web",
     "lint": "expo lint",
     "test": "jest"
