@@ -7,16 +7,12 @@ interface UseMapInteractionsProps {
   onSetGeofence: (latitude: number, longitude: number, radius: number) => void;
 }
 
-/**
- * Custom hook for handling map interactions
- */
+
 export const useMapInteractions = ({ onSetGeofence }: UseMapInteractionsProps) => {
   const [showRadiusDialog, setShowRadiusDialog] = useState<boolean>(false);
   const [pendingCoordinate, setPendingCoordinate] = useState<Coordinate | null>(null);
 
-  /**
-   * Handle map press event
-   */
+
   const handleMapPress = (event: any) => {
     const { coordinate } = event.nativeEvent;
 
@@ -28,9 +24,7 @@ export const useMapInteractions = ({ onSetGeofence }: UseMapInteractionsProps) =
     }
   };
 
-  /**
-   * Handle radius selection from dialog
-   */
+  
   const handleRadiusSelect = (radius: number) => {
     if (pendingCoordinate) {
       onSetGeofence(pendingCoordinate.latitude, pendingCoordinate.longitude, radius);
@@ -38,9 +32,7 @@ export const useMapInteractions = ({ onSetGeofence }: UseMapInteractionsProps) =
     }
   };
 
-  /**
-   * Close radius dialog
-   */
+
   const closeRadiusDialog = () => {
     setShowRadiusDialog(false);
     setPendingCoordinate(null);

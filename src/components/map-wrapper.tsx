@@ -8,10 +8,8 @@ import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { ErrorBoundary } from "@/components/error-boundary";
 
-// Check if we're in Expo Go (which doesn't have native modules)
 const isExpoGo = Constants.executionEnvironment === "storeClient";
 
-// Try to import MapView, but handle the case when it's not available
 let MapView: any = null;
 let Circle: any = null;
 let Marker: any = null;
@@ -19,9 +17,7 @@ let PROVIDER_GOOGLE: any = null;
 let mapsAvailable = false;
 let mapsLoadAttempted = false;
 
-// Use a function to check if maps are available
 function loadMaps() {
-  // If we're in Expo Go, maps won't be available - don't even try
   if (isExpoGo) {
     mapsAvailable = false;
     mapsLoadAttempted = true;
@@ -34,8 +30,7 @@ function loadMaps() {
   mapsLoadAttempted = true;
   
   try {
-    // Only try to require if we're not in Expo Go
-    // Dynamic require to avoid import-time errors
+    
     const maps = require("react-native-maps");
     if (maps && maps.default) {
       MapView = maps.default;
@@ -46,7 +41,6 @@ function loadMaps() {
       return true;
     }
   } catch (error) {
-    // Maps not available - this can happen even in dev builds if module isn't linked
     console.warn("react-native-maps not available:", error);
     mapsAvailable = false;
     return false;

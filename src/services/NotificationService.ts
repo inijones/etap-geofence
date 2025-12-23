@@ -1,16 +1,11 @@
 import * as Notifications from "expo-notifications";
 import { Alert } from "react-native";
 
-/**
- * Notification Service
- * Handles all notification-related operations
- */
+
 class NotificationService {
   private initialized = false;
 
-  /**
-   * Initialize notification handler
-   */
+
   initialize() {
     if (this.initialized) return;
 
@@ -27,9 +22,7 @@ class NotificationService {
     this.initialized = true;
   }
 
-  /**
-   * Request notification permissions
-   */
+
   async requestPermissions(): Promise<boolean> {
     try {
       const { status } = await Notifications.requestPermissionsAsync();
@@ -48,9 +41,7 @@ class NotificationService {
     }
   }
 
-  /**
-   * Trigger a notification
-   */
+
   async sendNotification(title: string, body: string): Promise<void> {
     try {
       await Notifications.scheduleNotificationAsync({
@@ -66,9 +57,7 @@ class NotificationService {
     }
   }
 
-  /**
-   * Send geofence entry notification
-   */
+ 
   async notifyGeofenceEntry(): Promise<void> {
     await this.sendNotification(
       "Entered Geofence",
@@ -76,9 +65,7 @@ class NotificationService {
     );
   }
 
-  /**
-   * Send geofence exit notification
-   */
+
   async notifyGeofenceExit(): Promise<void> {
     await this.sendNotification(
       "Exited Geofence",

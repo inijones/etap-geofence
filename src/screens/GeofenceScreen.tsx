@@ -23,12 +23,10 @@ export default function GeofenceScreen() {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? "light"];
 
-  // Initialize notification service
   useEffect(() => {
     notificationService.initialize();
   }, []);
 
-  // Location management
   const {
     location,
     hasPermission,
@@ -37,11 +35,9 @@ export default function GeofenceScreen() {
     refreshLocation,
   } = useLocation();
 
-  // Geofence management
   const { geofence, isInside, setGeofenceAt, clearGeofence, getDistance } =
     useGeofence(location);
 
-  // Map interactions
   const {
     showRadiusDialog,
     handleMapPress,
@@ -51,7 +47,6 @@ export default function GeofenceScreen() {
     onSetGeofence: setGeofenceAt,
   });
 
-  // Animate map to location when it's updated
   useEffect(() => {
     if (location && mapRef.current) {
       mapRef.current.animateToRegion(
@@ -61,9 +56,7 @@ export default function GeofenceScreen() {
     }
   }, [location]);
 
-  /**
-   * Handle clear geofence with confirmation
-   */
+ 
   const handleClearGeofence = () => {
     Alert.alert(
       "Clear Geofence",
